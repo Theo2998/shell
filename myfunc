@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "Le nom du script est : $0"
+echo "Il y a $# argument(s)"
+echo "La liste des argument est $*"
+echo "Le premier argument est : $1"
+echo "Le second argument est : $2"
+
+if (( $#>2 )); then
+	echo "il a plus de 2 argument"
+else
+	echo "il y a moins de 2 argument"
+fi

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo $user
+i=0
+echo $(date +%D)
+
+loginusers=$(who -u | awk '{print $1}' | uniq)
+echo "Liste des user connectés: "
+for u in $loginusers; do 
+	echo -e "$u\t"
+	i = $i+1
+done
+echo "il y a $i utilisateur"
+disk=$(df -kh . | awk 'NR==2 {print $4}')
+var=$(df -kh . | awk 'NR==2 {print $5}')
+var=${var/\%/}
+
+echo "vous disposez de $disk disponible"
+
+echo -n "il vous reste "
+if ((var <= 75)); then
+	echo -e "\e[34m"
+elif (( var > 75 )); then
+	echo -e "\e[31m"
+else
+	echo -e "\e[33m"
+fi
+echo -e "$var \e[0m % d'espace disponible"
