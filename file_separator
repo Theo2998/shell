@@ -1,0 +1,8 @@
+#! /bin/bash
+OLDIFS=$IFS
+IFS=:
+liste="bonjour:hello:morning"
+for l in $liste
+do
+    echo $l
+done

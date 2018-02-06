@@ -1,0 +1,134 @@
+#!/bin/bash
+
+FILE_EMPLOYE=fichier_employe.cvg
+
+function f1
+{
+	echo "saisissez votre nom (au moins 2 lettres): "
+	read nom
+
+	while ! [[ $nom =~ ^[a-zA-Z]{2,}$ ]]
+	do
+		echo "erreur lors de la saisie."
+		sleep 2
+		echo "resaisissez votre nom (au moins 2 lettres): "
+		read nom
+	done
+
+	echo "saisissez votre prenom (au moins 2 lettres): "
+	read prenom
+
+	while ! [[ $prenom =~ ^[a-zA-Z]{2,}$ ]]
+	do
+		echo "erreur lors de la saisie."
+		sleep 2
+		echo "resaisissez votre prenom (au moins 2 lettres): "
+		read prenom
+	done
+
+	echo "saisissez votre date de naissance (JJ/MM/YYYY): "
+	read date_naissance
+
+	while ! [[ $date_naissance =~ ^(((0[1-9]|[12][0-9]|30)[-/]?(0[13-9]|1[012])|31[-/]?(0[13578]|1[02])|(0[1-9]|1[0-9]|2[0-8])[-/]?02)[-/]?[0-9]{4}|29[-/]?02[-/]?([0-9]{2}(([2468][048]|[02468][48])|[13579][26])|([13579][26]|[02468][048]|0[0-9]|1[0-6])00))$ ]]
+	do
+		echo "erreur lors de la saisie."
+                sleep 2
+                echo "resaisissez votre date de naissance (JJ/MM/YYYY):"
+                read date_naissance
+	done
+
+	echo "saisissez votre situation familiale (marié(e)= M, pacsé(e)= P, célibataire= C, divorcé(e)= D, veuf(ve))= V: "
+	read sit_fam
+
+	while ! [[ $sit_fam =~ [mpcdvMPCDV] ]]
+	do
+		echo "erreur lors de la saisie."
+                sleep 2
+                echo "resaisissez votre situation familiale (marié(e), pacsé(e), célibataire, divorcé(e), veuf(ve)):"
+                read sit_fam
+	done
+
+	echo "saisissez votre adresse (Adresse ; Code Postal (5 chiffres); Ville): "
+	read adr
+
+	while ! [[ $adr =~ ^[0-9]+\s[a-zA-Z]+:[0-5]{5}:[a-zA-Z]+$ ]]   #ne fonctionne pas
+	do
+		echo "erreur lors de la saisie."
+                sleep 2
+                echo "resaisissez votre adresse (Adresse ; Code Postal (5 chiffres); Ville):"
+                read adr
+	done
+
+	echo "saisissez votre numéro de téléphone fix ou portable (10 chiffres): "
+	read tel
+
+	while ! [[ $tel =~ ^[0-9]{10}$ ]]
+	do
+		echo "erreur lors de la saisie."
+                sleep 2
+                echo "resaisissez votre numéro de téléphone fix ou portable (10 chiffres): "
+                read tel
+	done
+
+	echo $nom, $prenom, $date_naissance, $sit_fam, $adr, $tel >> $FILE_EMPLOYE
+}
+
+function f2
+{
+	echo "saisissez votre nom (au moins 2 lettres): "
+        read nom
+
+        while ! [[ $nom =~ ^[a-zA-Z]{2,}$ ]]
+        do
+                echo "erreur lors de la saisie."
+                sleep 2
+                echo "resaisissez votre nom (au moins 2 lettres): "
+                read nom
+        done
+
+        echo "saisissez votre prenom (au moins 2 lettres): "
+        read prenom
+
+        while ! [[ $prenom =~ ^[a-zA-Z]{2,}$ ]]
+        do
+                echo "erreur lors de la saisie."
+                sleep 2
+                echo "resaisissez votre prenom (au moins 2 lettres): "
+                read prenom
+        done
+
+}
+function f3
+{
+        echo "trois"
+}
+function f4
+{
+	echo "quatre"
+}
+function f5
+{
+	echo "cinq"
+}
+
+
+
+echo "MENU - GESTION DES SALARIES"
+
+echo "Saisir les informations personnelles d'un salarié, taper 1."
+echo "Consulter les informations personnelles d’un salarié, taper 3."
+echo "Consulter les informations personnelles de tous les salariés, taper 4."
+echo "Supprimer un salarié, taper 5."
+echo "Quitter, taper 60."
+
+echo -n "que souhaitez vous faire ?"
+read choix
+case $choix in
+1)f1;;
+2)f2;;
+3)f3;;
+4)f4;;
+5)f5;;
+60)exit 1;;
+*)echo "ERREUR"
+esac
